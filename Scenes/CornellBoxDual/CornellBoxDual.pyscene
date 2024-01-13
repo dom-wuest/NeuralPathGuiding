@@ -1,0 +1,98 @@
+# Create materials
+
+light = Material('Light')
+light.emissiveColor = float3(17, 12, 4)
+light.emissiveFactor = 5
+
+light2 = Material('Light2')
+light2.emissiveColor = float3(16, 12, 4)
+light2.emissiveFactor = 5
+
+floor = Material('Floor')
+floor.baseColor = float4(0.725, 0.71, 0.68, 1.0)
+floor.roughness = 0.5
+
+backWall = Material('Back Wall')
+backWall.baseColor = float4(0.725, 0.71, 0.68, 1.0)
+backWall.roughness = 0.5
+
+ceiling = Material('Ceiling')
+ceiling.baseColor = float4(0.725, 0.71, 0.68, 1.0)
+ceiling.roughness = 0.5
+
+leftWall = Material('Left Wall')
+leftWall.baseColor = float4(0.63, 0.065, 0.05, 1.0)
+leftWall.roughness = 0.5
+
+rightWall = Material('Right Wall')
+rightWall.baseColor = float4(0.14, 0.45, 0.091, 1.0)
+rightWall.roughness = 0.5
+
+largeBox = Material('Large Box')
+largeBox.baseColor = float4(0.725, 0.71, 0.68, 1.0)
+largeBox.roughness = 0.5
+
+smallBox = Material('Small Box')
+smallBox.baseColor = float4(0.725, 0.71, 0.68, 1.0)
+smallBox.roughness = 0.5
+
+# Create geometry
+
+quadMesh = TriangleMesh.createQuad()
+cubeMesh = TriangleMesh.createCube()
+
+# Create mesh instances
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Floor', Transform(scaling=float3(0.55, 1.0, 0.56))),
+    sceneBuilder.addTriangleMesh(quadMesh, floor)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Ceiling', Transform(scaling=float3(0.55, 1.0, 0.56), translation=float3(0, 0.55, 0), rotationEulerDeg=float3(180, 0, 0))),
+    sceneBuilder.addTriangleMesh(quadMesh, ceiling)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Back Wall', Transform(scaling=float3(0.55, 1.0, 0.56), translation=float3(0, 0.275, -0.275), rotationEulerDeg=float3(90, 0, 0))),
+    sceneBuilder.addTriangleMesh(quadMesh, backWall)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Left Wall', Transform(scaling=float3(0.55, 1.0, 0.56), translation=float3(-0.275, 0.275, 0), rotationEulerDeg=float3(0, 0, -90))),
+    sceneBuilder.addTriangleMesh(quadMesh, leftWall)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Right Wall', Transform(scaling=float3(0.55, 1.0, 0.56), translation=float3(0.275, 0.275, 0), rotationEulerDeg=float3(0, 0, 90))),
+    sceneBuilder.addTriangleMesh(quadMesh, rightWall)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Large Box', Transform(scaling=float3(0.165, 0.33, 0.165), translation=float3(-0.093, 0.165, -0.071), rotationEuler=float3(0, -1.27, 0))),
+    sceneBuilder.addTriangleMesh(cubeMesh, largeBox)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Small Box', Transform(scaling=float3(0.165, 0.165, 0.165), translation=float3(0.09, 0.0825, 0.111), rotationEuler=float3(0, -0.29, 0))),
+    sceneBuilder.addTriangleMesh(cubeMesh, smallBox)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Light 1', Transform(scaling=0.13, translation=float3(-0.274, 0.275, 0), rotationEulerDeg=float3(90, 90, 0))),
+    sceneBuilder.addTriangleMesh(quadMesh, light)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Light 2', Transform(scaling=0.13, translation=float3(0.274, 0.275, 0), rotationEulerDeg=float3(90, -90, 0))),
+    sceneBuilder.addTriangleMesh(quadMesh, light2)
+)
+
+# Create camera
+
+camera = Camera()
+camera.position = float3(0, 0.28, 1.2)
+camera.target = float3(0, 0.28, 0)
+camera.up = float3(0, 1, 0)
+camera.focalLength = 35.0
+sceneBuilder.addCamera(camera)

@@ -1,0 +1,23 @@
+# Load FBX
+sceneBuilder.importScene('CornellBoxMovingLight.fbx')
+
+# Add cameras
+camera = Camera("Camera")
+camera.position = float3(3.0,1.0,0.0)
+camera.target = float3(1.0,1.0,0.0)
+camera.up = float3(0.0,1.0,0.0)
+sceneBuilder.addCamera(camera)
+
+leftWall = sceneBuilder.getMaterial("LeftWall")
+leftWall.metallic = 0.0
+leftWall.roughness = 0.5
+
+rightWall = sceneBuilder.getMaterial("RightWall")
+rightWall.metallic = 0.0
+rightWall.roughness = 0.5
+
+floor = sceneBuilder.getMaterial("Floor")
+floor.metallic = 0.0
+floor.roughness = 0.5
+
+sceneBuilder.selectedCamera = sceneBuilder.cameras[0]

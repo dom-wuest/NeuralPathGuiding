@@ -1,0 +1,171 @@
+# Create materials
+
+diffuse = Material('Diffuse')
+diffuse.baseColor = float4(0.5, 0.5, 0.5, 1.0)
+diffuse.roughness = 1
+diffuse.metallic = 0
+diffuse.transmissionColor = float3(1, 1, 1)
+diffuse.indexOfRefraction = 1.5
+diffuse.doubleSided = True
+
+glass = Material('Glass')
+glass.indexOfRefraction = 1.5
+glass.roughness = 0
+glass.metallic = 0
+glass.specularTransmission = 1
+glass.doubleSided = True
+glass.nestedPriority = 2
+
+metalBaseColor = float4(0.52490, 0.39257, 0.31054, 1.0)
+metalIoR = 1.35
+
+lamp = Material('Lamp')
+lamp.baseColor = metalBaseColor
+lamp.specularParams = float4(0.0,0.707031,1.0,0.0)
+lamp.roughness = 0.25
+lamp.metallic = 1.0
+lamp.indexOfRefraction = metalIoR
+lamp.doubleSided = True
+
+wood = Material('Wood')
+wood.baseColor = float4(0.32963, 0.257976, 0.150292, 1.0)
+wood.roughness = 1.0
+wood.doubleSided = True
+
+light1 = Material('Light1')
+light1.emissiveColor = float3(523.2578, 523.2578, 523.2578)
+light1.emissiveFactor = 1
+light1.doubleSided = True
+
+light2 = Material('Light2')
+light2.emissiveColor = float3(12048.179, 8605.842, 6196.206)
+light2.emissiveFactor = 1
+light2.doubleSided = True
+
+meshTable = TriangleMesh.createFromFile('models/Mesh000.ply')
+meshLampPole = TriangleMesh.createFromFile('models/Mesh001.ply')
+meshEgg = TriangleMesh.createFromFile('models/Mesh002.ply')
+meshTablePole1 = TriangleMesh.createFromFile('models/Mesh003.ply')
+meshLamp2Back = TriangleMesh.createFromFile('models/Mesh004.ply')
+meshLampBase = TriangleMesh.createFromFile('models/Mesh005.ply')
+meshTablePole2 = TriangleMesh.createFromFile('models/Mesh006.ply')
+meshLampHead = TriangleMesh.createFromFile('models/Mesh007.ply')
+meshLamp2 = TriangleMesh.createFromFile('models/Mesh008.ply')
+meshTablePole3 = TriangleMesh.createFromFile('models/Mesh009.ply')
+meshRoom = TriangleMesh.createFromFile('models/Mesh010.ply')
+meshTablePole4 = TriangleMesh.createFromFile('models/Mesh011.ply')
+
+meshLight1 = TriangleMesh()
+meshLight1.addVertex(position=float3(-2.75736, 6, 2.31365), normal=float3(1.58516e-7, 1, 6.92894e-15), texCoord=float2(0.0, 0.0))
+meshLight1.addVertex(position=float3(-2.75736, 6, 2.86515), normal=float3(1.58516e-7, 1, 6.92894e-15), texCoord=float2(1.0, 0.0))
+meshLight1.addVertex(position=float3(-2.20586, 6, 2.86515), normal=float3(1.58516e-7, 1, 6.92894e-15), texCoord=float2(1.0, 1.0))
+meshLight1.addVertex(position=float3(-2.20586, 6, 2.31365), normal=float3(1.58516e-7, 1, 6.92894e-15), texCoord=float2(0.0, 1.0))
+meshLight1.addTriangle(0,1,2)
+meshLight1.addTriangle(0,2,3)
+
+meshLight2 = TriangleMesh()
+meshLight2.addVertex(position=float3(-2.74778, 5.17227, -3.73363), normal=float3(0.070781, -0.429239, 0.900413), texCoord=float2(0.0, 0.0))
+meshLight2.addVertex(position=float3(-2.768, 5.05027, -3.7902), normal=float3(0.070781, -0.429239, 0.900413), texCoord=float2(1.0, 0.0))
+meshLight2.addVertex(position=float3(-2.63386, 5.03607, -3.80751), normal=float3(0.070781, -0.429239, 0.900413), texCoord=float2(1.0, 1.0))
+meshLight2.addVertex(position=float3(-2.61364, 5.15807, -3.75094), normal=float3(0.070781, -0.429239, 0.900413), texCoord=float2(0.0, 1.0))
+meshLight2.addTriangle(0,1,2)
+meshLight2.addTriangle(0,2,3)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Egg', Transform(scaling=float3(1.0, 1.0, 1.0))),
+    sceneBuilder.addTriangleMesh(meshEgg, diffuse)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Room', Transform(scaling=float3(1.0, 1.0, 1.0))),
+    sceneBuilder.addTriangleMesh(meshRoom, diffuse)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Table', Transform(scaling=float3(1.0, 1.0, 1.0))),
+    sceneBuilder.addTriangleMesh(meshTable, diffuse)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('LampBase', Transform(scaling=float3(1.0, 1.0, 1.0))),
+    sceneBuilder.addTriangleMesh(meshLampBase, diffuse)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('LampPole', Transform(scaling=float3(1.0, 1.0, 1.0))),
+    sceneBuilder.addTriangleMesh(meshLampPole, diffuse)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('LampHead', Transform(scaling=float3(1.0, 1.0, 1.0))),
+    sceneBuilder.addTriangleMesh(meshLampHead, diffuse)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Lamp2', Transform(scaling=float3(1.0, 1.0, 1.0))),
+    sceneBuilder.addTriangleMesh(meshLamp2, diffuse)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('TablePole1', Transform(scaling=float3(1.0, 1.0, 1.0))),
+    sceneBuilder.addTriangleMesh(meshTablePole1, diffuse)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('TablePole2', Transform(scaling=float3(1.0, 1.0, 1.0))),
+    sceneBuilder.addTriangleMesh(meshTablePole2, diffuse)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('TablePole3', Transform(scaling=float3(1.0, 1.0, 1.0))),
+    sceneBuilder.addTriangleMesh(meshTablePole3, diffuse)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('TablePole4', Transform(scaling=float3(1.0, 1.0, 1.0))),
+    sceneBuilder.addTriangleMesh(meshTablePole4, diffuse)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Lamp2Back', Transform(scaling=float3(1.0, 1.0, 1.0))),
+    sceneBuilder.addTriangleMesh(meshLamp2Back, diffuse)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Light1', Transform(scaling=float3(1.0, 1.0, 1.0))),
+    sceneBuilder.addTriangleMesh(meshLight1, light1)
+)
+
+sceneBuilder.addMeshInstance(
+    sceneBuilder.addNode('Light2', Transform(scaling=float3(1.0, 1.0, 1.0))),
+    sceneBuilder.addTriangleMesh(meshLight2, light2)
+)
+
+leftWall = Material('Left Wall')
+leftWall.baseColor = float4(0.63, 0.065, 0.05, 1.0)
+leftWall.roughness = 1
+
+rightWall = Material('Right Wall')
+rightWall.baseColor = float4(0.14, 0.45, 0.091, 1.0)
+rightWall.roughness = 1
+
+quadMesh = TriangleMesh.createQuad()
+
+#sceneBuilder.addMeshInstance(
+#    sceneBuilder.addNode('Left Wall', Transform(scaling=float3(10, 10, 10), translation=float3(-1, 3, 3.99), rotationEulerDeg=float3(-90, 0, -90))),
+#    sceneBuilder.addTriangleMesh(quadMesh, leftWall)
+#)
+
+#sceneBuilder.addMeshInstance(
+#    sceneBuilder.addNode('Right Wall', Transform(scaling=float3(10, 10, 10), translation=float3(-1, 3, -3.99), rotationEulerDeg=float3(90, 0, 90))),
+#    sceneBuilder.addTriangleMesh(quadMesh, rightWall)
+#)
+
+# Create camera
+
+camera = Camera()
+camera.position = float3(16.215494,4.051627,0.011486)
+camera.target = float3(15.215518,4.047002,0.006462)
+camera.up = float3(0, 1, 0)
+camera.focalLength = 35.0
+sceneBuilder.addCamera(camera)
